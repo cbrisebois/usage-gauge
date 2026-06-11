@@ -1,0 +1,14 @@
+{
+  "name": "usage-gauge",
+  "displayName": "Usage Gauge",
+  "version": "1.0.0",
+  "description": "A footer pace gauge for your Claude subscription limits. One white/green/yellow/red bar shows whether you're on track to use your 5-hour session and 7-day budgets fully without running out early. Zero API calls — reads rate_limits from statusLine stdin.",
+  "author": {
+    "name": "Cary Brisebois"
+  },
+  "homepage": "https://github.com/cbrisebois/usage-gauge",
+  "repository": "https://github.com/cbrisebois/usage-gauge",
+  "license": "MIT",
+  "keywords": ["statusline", "status-bar", "usage", "rate-limits", "session", "weekly", "gauge"],
+  "commands": "./commands/"
+}

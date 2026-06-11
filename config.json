@@ -1,0 +1,15 @@
+{
+  "refresh_seconds": 60,
+
+  "bar_width": 20,
+  "axis_max": 200,
+  "green_lo": 80,
+  "green_hi": 110,
+  "yellow_hi": 150,
+
+  "min_elapsed_frac": 0.03,
+
+  "block": "█",
+  "show_session": true,
+  "show_weekly": true
+}

@@ -1,0 +1,5 @@
+# runtime state, if anyone runs the script from inside the repo
+.usage-gauge-state.json
+.usage-gauge-state.json.tmp
+__pycache__/
+*.pyc

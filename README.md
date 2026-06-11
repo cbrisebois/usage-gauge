@@ -41,7 +41,7 @@ The 5-hour session pointer rides **above** the bar (`5h▼`), the weekly pointer
 
 ```text
 /plugin marketplace add cbrisebois/usage-gauge
-/plugin install usage-gauge@usage-gauge
+/plugin install usage-gauge@cbrisebois
 /usage-gauge:setup
 ```
 

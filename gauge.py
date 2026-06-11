@@ -32,6 +32,13 @@ import os
 import sys
 import time
 
+# Windows consoles default to cp1252, which can't encode the gauge glyphs
+# (▼ ▲ █). Force UTF-8 on stdout so the statusLine output never crashes.
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -77,6 +84,8 @@ DEFAULTS = {
     "min_elapsed_frac": 0.03,
 
     "block": "█",            # bar cell glyph
+    "arrow_session": "▼",    # 5-hour pointer (above the bar); set "v" for ASCII
+    "arrow_weekly": "▲",     # weekly pointer (below the bar); set "^" for ASCII
     "show_session": True,    # the 5-hour window (▼ above)
     "show_weekly": True,     # the 7-day all-models window (▲ below)
 }
@@ -98,7 +107,7 @@ RESET = "\033[0m"
 def load_config():
     cfg = dict(DEFAULTS)
     try:
-        with open(CONFIG_PATH) as f:
+        with open(CONFIG_PATH, encoding="utf-8") as f:
             cfg.update(json.load(f))
     except Exception:
         pass
@@ -107,7 +116,7 @@ def load_config():
 
 def load_state():
     try:
-        with open(STATE_PATH) as f:
+        with open(STATE_PATH, encoding="utf-8") as f:
             return json.load(f)
     except Exception:
         return {}
@@ -116,7 +125,7 @@ def load_state():
 def save_state(state):
     try:
         tmp = STATE_PATH + ".tmp"
-        with open(tmp, "w") as f:
+        with open(tmp, "w", encoding="utf-8") as f:
             json.dump(state, f)
         os.replace(tmp, STATE_PATH)
     except Exception:
@@ -185,13 +194,13 @@ def render(limits, cfg, now):
         w = limits["five_hour"]
         proj, _ = projected_pct(w["used"], w["resets_at"], WINDOW_LEN["five_hour"], cfg, now)
         col = pointer_col(proj, cfg)
-        top = color_for(proj, cfg) + caret_label("5h", "▼", proj, col) + RESET
+        top = color_for(proj, cfg) + caret_label("5h", cfg["arrow_session"], proj, col) + RESET
 
     if cfg["show_weekly"] and "seven_day" in limits:
         w = limits["seven_day"]
         proj, _ = projected_pct(w["used"], w["resets_at"], WINDOW_LEN["seven_day"], cfg, now)
         col = pointer_col(proj, cfg)
-        bottom = color_for(proj, cfg) + caret_label("wk", "▲", proj, col) + RESET
+        bottom = color_for(proj, cfg) + caret_label("wk", cfg["arrow_weekly"], proj, col) + RESET
 
     if top is None and bottom is None:
         return f"{C_DIM}usage gauge: waiting for first response…{RESET}"

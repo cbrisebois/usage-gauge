@@ -11,7 +11,7 @@
       "name": "usage-gauge",
       "source": "./",
       "description": "A white/green/yellow/red footer gauge showing whether you're pacing your 5-hour session and 7-day budgets to land ~exactly at reset, without running out early.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "homepage": "https://github.com/cbrisebois/usage-gauge"
     }
   ]

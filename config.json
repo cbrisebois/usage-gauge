@@ -10,6 +10,8 @@
   "min_elapsed_frac": 0.03,
 
   "block": "█",
+  "arrow_session": "▼",
+  "arrow_weekly": "▲",
   "show_session": true,
   "show_weekly": true
 }
